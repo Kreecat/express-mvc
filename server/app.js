@@ -6,7 +6,8 @@ var path = require('path');
 var mongoose = require('mongoose');
 
 require('./db/db');
-var Villain = require('./models/Villain');
+
+var VillainController = require('./controllers/VillainController');
 
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -15,9 +16,7 @@ app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(request, response){
-	response.render('home', {villainsArray: villains});
-});
+app.use('/villains', VillainController);
 
 server.listen(3000, function(){
 	console.log("Listening on port 3000");
